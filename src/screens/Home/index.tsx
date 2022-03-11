@@ -13,6 +13,7 @@ import Item from './Item';
 import {styles} from './styles';
 import {globalStyles} from '../../theme/app';
 import usePokemons from '../../hooks/usePokemos';
+import List from './List';
 
 const Home = () => {
   const {pokemons, getMore} = usePokemons();
@@ -23,18 +24,10 @@ const Home = () => {
         style={styles.pokeBall}
       />
 
-      <FlatList
-        numColumns={2}
-        ListHeaderComponent={
-          <Text style={StyleSheet.flatten([globalStyles.title])}>Pokedex</Text>
-        }
-        style={{marginHorizontal: 10}}
+      <List
+        headerText="Pokedex"
         data={pokemons.data}
-        renderItem={props => <Item pokemon={props.item} />}
-        keyExtractor={pokemon => pokemon.id}
         onEndReached={getMore}
-        onEndReachedThreshold={0.4}
-        showsVerticalScrollIndicator={false}
         ListFooterComponent={
           <ActivityIndicator style={{height: 100}} size={20} color="gray" />
         }
